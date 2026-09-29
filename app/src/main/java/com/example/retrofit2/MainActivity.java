@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private TextView textViewPytanie;
     RadioGroup radioGroupPytania;
-    RadioButton radioButtonA, RadioButtonB, radioButtonC;
+    RadioButton radioButtonA, radioButtonB, radioButtonC;
     Button buttonNastepne;
     List<Pytanie> pytaniaZInternetu;
     @Override
@@ -40,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         textViewPytanie = findViewById(R.id.trescPytania);
         radioButtonA = findViewById(R.id.radioButton);
-        RadioButtonB = findViewById(R.id.radioButton2);
+        radioButtonB = findViewById(R.id.radioButton2);
         radioButtonC = findViewById(R.id.radioButton3);
         buttonNastepne = findViewById(R.id.button);
+        radioGroupPytania = findViewById(R.id.radioGroup);
         Retrofit retrofit = new Retrofit.Builder().
                 baseUrl("https://my-json-server.typicode.com/Szymonx14/pytania_retrofit/").addConverterFactory(GsonConverterFactory.create()).build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         pytaniaZInternetu = response.body();
-                        textViewPytanie.setText(pytaniaZInternetu.get(0).getTrescPytania());
+                        wyswietlPytanie(0);
                     }
 
                     @Override
@@ -65,5 +66,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void wyswietlPytanie(int nr){
+        radioGroupPytania.clearCheck();
+        textViewPytanie.setText(pytaniaZInternetu.get(nr).getTrescPytania());
+        radioButtonA.setText(pytaniaZInternetu.get(nr).getOdpA());
+        radioButtonB.setText(pytaniaZInternetu.get(nr).getOdpB());
+        radioButtonC.setText(pytaniaZInternetu.get(nr).getOdpC());
     }
 }

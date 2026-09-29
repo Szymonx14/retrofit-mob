@@ -10,12 +10,12 @@ public class Pytanie {
 
 
 
-    @SerializedName("odp_a")
+    @SerializedName("odpa")
     private String odpA;
-    @SerializedName("odp_b")
+    @SerializedName("odpb")
     private String odpB;
 
-    @SerializedName("odp_c")
+    @SerializedName("odpc")
     private String odpC;
 
     public Pytanie(String trescPytania, String odpA, String odpB, String odpC) {
